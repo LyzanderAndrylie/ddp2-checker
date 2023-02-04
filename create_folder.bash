@@ -30,6 +30,8 @@ create_folder() {
       create_folder_lab "students/${student}"
       create_folder_tp "students/${student}"
     done
+
+    echo "Folder Berhasil dibuat"
   else
     echo "Folder tidak dibuat"
   fi
