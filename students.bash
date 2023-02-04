@@ -11,3 +11,9 @@ STUDENTS_GITHUB=(
   "URL Mahasiswa 2"
   "URL Mahasiswa N"
 )
+
+show_students_index() {
+  for i in "${!STUDENTS[@]}"; do
+    echo "${i} - ${STUDENTS[$i]}"
+  done
+}
