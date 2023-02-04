@@ -3,7 +3,6 @@ source students.bash
 # Creates folder for each lab
 create_folder_lab() {
   for i in {01..10}; do
-    mkdir -p "${1}/lab${i}/in"
     mkdir -p "${1}/lab${i}/out"
     mkdir -p "${1}/lab${i}/src"
     mkdir -p "${1}/lab${i}/bin"
