@@ -3,7 +3,7 @@ source students.bash
 # Extract all submissions
 extract_submission() {
   read -r -p "Ekstrak Lab ke-(XX): " number
-  read -r -p "Apakah ingin mengekstrak file mahasiswa? [Y/n]" answer
+  read -r -p "Apakah ingin mengekstrak file mahasiswa? [Y/n] " answer
 
   if [[ "${answer}" == "Y" ]]; then
     # Extract DDP1 gradebook zip
