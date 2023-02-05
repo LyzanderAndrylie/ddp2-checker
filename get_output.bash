@@ -26,11 +26,11 @@ compile_all_student_file() {
 #   Lab type
 ########################################################
 get_output_for_solution() {
-  local main_class
-  main_class=$(find_main_class_solution "${1}")
+  local class_name
+  class_name=$(find_main_class_solution "${1}")
 
   for file in "solution/lab${1}/in/"*; do
-    java -cp "solution/lab${1}/bin/" "${main_class}" <"${file}" >"${file/in/out}"
+    java -cp "solution/lab${1}/bin/" "${class_name}" <"${file}" >"${file/in/out}"
   done
 }
 
@@ -41,11 +41,11 @@ get_output_for_solution() {
 ########################################################
 get_output_for_all_student() {
   for student in "${STUDENTS[@]}"; do
-    local main_class
-    main_class=$(find_main_class_student "${1}" "${student}")
+    local class_name
+    class_name=$(find_main_class_student "${1}" "${student}")
 
     for file in "solution/lab${1}/in/"*; do
-      java -cp "students/${student}/lab${1}/bin/" "${main_class}" <"${file}" >"students/${student}/lab${1}/out/${file##*\/}"
+      java -cp "students/${student}/lab${1}/bin/" "${class_name}" <"${file}" >"students/${student}/lab${1}/out/${file##*\/}"
     done
   done
 }
