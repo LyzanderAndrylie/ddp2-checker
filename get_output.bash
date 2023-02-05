@@ -14,7 +14,7 @@ compile_solution_file() {
 # Arguments:
 #   Lab type
 ########################################################
-compile_student_file() {
+compile_all_student_file() {
   for student in "${STUDENTS[@]}"; do
     javac "students/${student}/lab${1}/src/"*.java -d "students/${student}/lab${1}/bin"
   done
@@ -24,37 +24,81 @@ compile_student_file() {
 # Get output for solution
 # Arguments:
 #   Lab type
-#   Class name containing main() method
 ########################################################
 get_output_for_solution() {
-  for input in "solution/lab${1}/in/"*; do
-    java -cp "solution/lab${1}/bin/" "${2}" <"${input}" >"${input/in/out}"
+  local main_class
+  main_class=$(find_main_class_solution "${1}")
+
+  for file in "solution/lab${1}/in/"*; do
+    java -cp "solution/lab${1}/bin/" "${main_class}" <"${file}" >"${file/in/out}"
   done
 }
 
 ########################################################
-# Get output for student
+# Get output for all student
 # Arguments:
 #   Lab type
+########################################################
+get_output_for_all_student() {
+  for student in "${STUDENTS[@]}"; do
+    local main_class
+    main_class=$(find_main_class_student "${1}" "${student}")
+
+    for file in "solution/lab${1}/in/"*; do
+      java -cp "students/${student}/lab${1}/bin/" "${main_class}" <"${file}" >"students/${student}/lab${1}/out/${file##*\/}"
+    done
+  done
+}
+
+########################################################
+# Find class containing main method for solution
+# Arguments:
+#   Lab type
+# Output:
 #   Class name containing main() method
 ########################################################
-get_output_for_student() {
-  for student in "${STUDENTS[@]}"; do
-    for input in "solution/lab${1}/in/"*; do
-      java -cp "students/${student}/lab${1}/bin/" "${2}" <"${input}" >"students/${student}/lab${1}/out/${input##*\/}"
-    done
+find_main_class_solution() {
+  for file in "solution/lab${1}/bin/"*; do
+    local class_info
+    class_info=$(javap "${file}")
+
+    if [[ "${class_info}" == *"public static void main(java.lang.String[])"* ]]; then
+      file="${file##*\/}"
+      file="${file%%.class}"
+      echo "${file}"
+    fi
+  done
+}
+
+########################################################
+# Find class containing main method for student
+# Arguments:
+#   Lab type
+#   Student's name
+# Output:
+#   Class name containing main() method
+########################################################
+find_main_class_student() {
+  for file in "students/${2}/lab${1}/bin/"*; do
+    local class_info
+    class_info=$(javap "${file}")
+
+    if [[ "${class_info}" == *"public static void main(java.lang.String[])"* ]]; then
+      file="${file##*\/}"
+      file="${file%%.class}"
+      echo "${file}"
+    fi
   done
 }
 
 get_output() {
   read -r -p "Ekstrak Lab ke-(XX): " lab_type
-  read -r -p "Main Class: " main_class
 
   # File output for solution
   read -r -p "Apakah Anda ingin mendapatkan file output untuk solusi? [Y/n] " answer
   if [[ "${answer}" == "Y" ]]; then
     compile_solution_file "${lab_type}"
-    get_output_for_solution "${lab_type}" "${main_class}"
+    get_output_for_solution "${lab_type}"
     echo "File output untuk solusi berhasil dibuat"
   else
     echo "File output tidak dibuat"
@@ -63,8 +107,8 @@ get_output() {
   # File output for students
   read -r -p "Apakah Anda ingin mendapatkan file output untuk Mahasiswa [Y/n] " answer
   if [[ "${answer}" == "Y" ]]; then
-    compile_student_file "${lab_type}"
-    get_output_for_student "${lab_type}" "${main_class}"
+    compile_all_student_file "${lab_type}"
+    get_output_for_all_student "${lab_type}"
     echo "File mahasiswa untuk solusi berhasil dibuat"
   else
     echo "File output tidak dibuat"
