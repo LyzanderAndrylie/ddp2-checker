@@ -6,7 +6,7 @@ extract_submission() {
   read -r -p "Apakah ingin mengekstrak file mahasiswa? [Y/n] " answer
 
   if [[ "${answer}" == "Y" ]]; then
-    # Extract DDP1 gradebook zip
+    # Extract DDP2 gradebook zip
     unzip tmp-submission/DDP2*.zip -d tmp-submission
 
     # Extract all student submission

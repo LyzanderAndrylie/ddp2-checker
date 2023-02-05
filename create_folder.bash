@@ -13,7 +13,7 @@ create_folder_lab() {
   done
 }
 
-# Creates folder for each tp
+# Creates folder for tp
 create_folder_tp() {
   mkdir -p "${1}/tp"
 }
