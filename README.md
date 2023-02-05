@@ -31,7 +31,7 @@ DDP2 Checker adalah script untuk memudahkan asdos untuk mengecek output mahasisw
 
 5. `bash delete_tmp.bash`
 
-    Berfungsi untuk menghapus semua file pada `tmp-submission`. 
+    Berfungsi untuk menghapus semua file pada `tmp-submission`.  
 
 ## Catatan
 
