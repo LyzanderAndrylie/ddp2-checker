@@ -1,8 +1,8 @@
 STUDENTS=(
-  "Mahasiswa 0"
-  "Mahasiswa 1"
-  "Mahasiswa 2"
-  "Mahasiswa N"
+  "Nama Mahasiswa 0"
+  "Nama Mahasiswa 1"
+  "Nama Mahasiswa 2"
+  "Nama Mahasiswa N"
 )
 
 STUDENTS_GITHUB=(

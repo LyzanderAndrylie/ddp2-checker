@@ -13,6 +13,8 @@ DDP2 Checker adalah script untuk memudahkan asdos untuk mengecek output mahasisw
 
     Berfungsi untuk membuat struktur folder awal.  
 
+    > :memo: **Note:** Sebelum menjalankan perintah tersebut, kalian harus menyesuaikan nama-nama mahasiswa asdosan kalian di `students.bash`'.
+
 2. `bash extract_submission.bash`
 
     Berfungsi untuk mengekstrak file submisi mahasiswa ke folder yang sesuai.
