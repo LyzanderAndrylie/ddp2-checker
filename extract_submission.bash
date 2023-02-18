@@ -7,7 +7,7 @@ extract_submission() {
 
   if [[ "${answer}" == "Y" ]]; then
     # Extract DDP2 gradebook zip
-    unzip tmp-submission/DDP2*.zip -d tmp-submission
+    unzip tmp-submission/DDP*.zip -d tmp-submission
 
     # Extract all student submission
     for student in "${STUDENTS[@]}"; do
